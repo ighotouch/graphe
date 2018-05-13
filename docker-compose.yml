@@ -1,0 +1,9 @@
+version: "3"
+services:
+  bible:
+    ports:
+      - "4000:4000"
+    build: .
+    volumes:
+      - ./:/src:cached
+    command: [npm, start]
