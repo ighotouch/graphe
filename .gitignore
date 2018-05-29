@@ -6,3 +6,4 @@ package-lock.json
 devops/*
 devops/keys/gcloud-service-key.json
 dist/*
+public/*
