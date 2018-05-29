@@ -5,3 +5,4 @@ package-lock.json
 .vscode/*
 devops/*
 devops/keys/gcloud-service-key.json
+dist/*

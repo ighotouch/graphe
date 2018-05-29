@@ -7,6 +7,7 @@
     "lint": "eslint app.js"
   },
   "dependencies": {
+    "autoprefixer": "^8.5.1",
     "bootstrap": "^4.1.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
@@ -15,16 +16,25 @@
     "http-errors": "~1.6.2",
     "morgan": "~1.9.0",
     "nodemon": "^1.17.4",
+    "postcss-cli": "^5.0.0",
     "pug": "2.0.0-beta11",
     "react": "^16.4.0",
     "react-dom": "^16.4.0"
   },
   "devDependencies": {
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^0.28.11",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.8.1",
+    "extract-text-webpack-plugin": "^4.0.0-alpha.0",
+    "node-sass": "^4.9.0",
+    "postcss-loader": "^2.1.5",
+    "precss": "^6.0.22",
+    "sass-loader": "^7.0.1",
+    "style-loader": "^0.21.0",
     "webpack": "^4.10.1"
   },
   "nodemonConfig": {
