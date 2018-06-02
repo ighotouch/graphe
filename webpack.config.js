@@ -1,8 +1,6 @@
 const path = require('path');
-const precss = require('precss');
-const autoprefixer = require('autoprefixer');
+const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const extractStyle = new ExtractTextPlugin({
   filename: '[name].css',
@@ -10,17 +8,30 @@ const extractStyle = new ExtractTextPlugin({
 
 module.exports = {
   entry: {
+    frontend: './frontend/index.js',
     styles: [
       './frontend/index.js',
       path.resolve(__dirname, 'static/stylesheets/style.scss'),
     ],
   },
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'public/stylesheets'),
+  devServer: {
+    contentBase: './public',
   },
+  output: {
+    filename: '[name].js',
+    chunkFilename: '[id].js',
+    path: path.resolve(__dirname, 'public'),
+    publicPath: '/',
+  },
+  devtool: 'inline-source-map',
   module: {
     rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel-loader',
+        options: { presets: ['env'] }
+      },
       {
         test: /\.scss$/,
         use: extractStyle.extract({
@@ -29,8 +40,8 @@ module.exports = {
       },
     ],
   },
+  resolve: { extensions: ['*', '.js', '.jsx'] },
   plugins: [
-    new CleanWebpackPlugin(['public']),
     extractStyle,
   ],
 };
