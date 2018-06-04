@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const extractStyle = new ExtractTextPlugin({
@@ -11,7 +10,7 @@ module.exports = {
     frontend: './frontend/index.js',
     styles: [
       './frontend/index.js',
-      path.resolve(__dirname, 'static/stylesheets/style.scss'),
+      path.resolve(__dirname, 'assets/stylesheets/style.scss'),
     ],
   },
   devServer: {
@@ -30,7 +29,7 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader',
-        options: { presets: ['env'] }
+        options: { presets: ['env'] },
       },
       {
         test: /\.scss$/,
