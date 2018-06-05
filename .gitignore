@@ -2,9 +2,12 @@
 __pycache__
 node_modules/
 package-lock.json
+yarn.lock
 .vscode/*
 devops/*
 devops/keys/gcloud-service-key.json
 dist/*
 public/stylesheets/*
-coverage/*
+coverage
+cypress/screenshots
+cypress/videos
