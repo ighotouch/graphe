@@ -1,4 +1,6 @@
-const createError = require('http-errors');
+import { createError } from 'http-errors';
+import { connect } from './config/database';
+
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -13,14 +15,17 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const app = express();
+connect();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(webpackDevMiddleware(compiler, {
-  publicPath: config.output.publicPath,
-}));
+app.use(
+  webpackDevMiddleware(compiler, {
+    publicPath: config.output.publicPath,
+  }),
+);
 
 app.use(logger('dev'));
 app.use(express.json());

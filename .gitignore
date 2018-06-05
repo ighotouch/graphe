@@ -7,3 +7,4 @@ devops/*
 devops/keys/gcloud-service-key.json
 dist/*
 public/stylesheets/*
+coverage/*

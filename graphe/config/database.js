@@ -1,4 +1,7 @@
-module.exports = {
-  database: 'mongodb://gabriellelc95:bibleapp4me@ds161551.mlab.com:61551/bible-accountability',
-  secret: 'mysecret',
-};
+import mongoose from 'mongoose';
+import appConfig from './config';
+
+mongoose.Promise = global.Promise;
+
+export const connect = (config = appConfig) => mongoose.connect(config.db.url)
+

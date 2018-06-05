@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "DEBUG=myapp:* nodemon ./bin/www",
+    "babel-node": "babel-node --presets=env",
+    "start": "nodemon --exec npm run babel-node ./bin/www",
     "start-webpack": "webpack-dev-server --open",
     "lint": "eslint app.js",
     "test": "jest --coverage",
@@ -39,17 +40,21 @@
     "css-loader": "^0.28.11",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.8.1",
     "extract-text-webpack-plugin": "^4.0.0-alpha.0",
     "jest": "^23.1.0",
     "node-sass": "^4.9.0",
     "postcss-loader": "^2.1.5",
     "precss": "^3.1.2",
+    "prettier": "^1.13.4",
     "regenerator-runtime": "^0.11.1",
     "sass-loader": "^7.0.2",
     "style-loader": "^0.21.0",
+    "supertest": "^3.1.0",
     "webpack-cli": "^3.0.0",
     "webpack-dev-server": "^3.1.4"
   },
@@ -67,10 +72,11 @@
   "jest": {
     "collectCoverageFrom": [
       "**/*.{js,jsx}",
-      "!**/node_modules/**"
+      "!**/node_modules/**",
+      "!**/coverage/**"
     ],
     "coverageThreshold": {
-      "global":{
+      "global": {
         "statements": 50,
         "branches": 50,
         "functions": 50,
