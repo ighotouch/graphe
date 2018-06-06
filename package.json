@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "babel-node": "babel-node --presets=env",
-    "start": "nodemon --exec npm run babel-node ./bin/www",
+    "start": "DEBUG=myapp:* nodemon --exec npm run babel-node ./bin/www",
     "start-webpack": "webpack-dev-server --open",
     "lint": "eslint app.js",
     "test": "jest --coverage",
