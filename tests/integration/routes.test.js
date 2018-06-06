@@ -9,6 +9,12 @@ test('should respond with a 200 with no query parameters', () => {
 
 test('should respond with a 404 with no query parameters', () => {
   return request(app)
-    .get('/ddd')
+    .get('/error')
+    .expect(500);
+});
+
+test('should throw error', () => {
+  return request(app)
+    .get('/error')
     .expect(500);
 });

@@ -6,6 +6,7 @@ const extractStyle = new ExtractTextPlugin({
 });
 
 module.exports = {
+  mode: 'development',
   entry: {
     frontend: './frontend/index.js',
     styles: [
