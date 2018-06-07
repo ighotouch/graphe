@@ -1,13 +1,15 @@
 import { createError } from 'http-errors';
+import express from 'express';
+import { graphiqlExpress } from 'apollo-server-express';
 import { connect } from './config/database';
+import { graphQLRouter } from './api';
 
-const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
-const config = require('../webpack.config.js');
+const config = require('../webpack.dev.js');
 
 const compiler = webpack(config);
 
@@ -33,7 +35,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-// app.use('/users', usersRouter);
+app.use('/graphql', graphQLRouter);
+app.use('/docs', graphiqlExpress({ endpointURL: '/graphql' }));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

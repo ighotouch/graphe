@@ -11,3 +11,4 @@ public/stylesheets/*
 coverage
 cypress/screenshots
 cypress/videos
+.env

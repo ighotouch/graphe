@@ -3,5 +3,7 @@ import appConfig from './config';
 
 mongoose.Promise = global.Promise;
 
-export const connect = (config = appConfig) => mongoose.connect(config.db.url)
+export const connect = (config = appConfig) =>
+  mongoose.connect(config.databaseUrl);
 
+export default connect;
