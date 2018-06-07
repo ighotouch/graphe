@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
-const config = require('../webpack.config.js');
+const config = require('../webpack.dev.js');
 
 const compiler = webpack(config);
 

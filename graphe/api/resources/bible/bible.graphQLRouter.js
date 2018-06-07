@@ -1,2 +1,2 @@
-export *  from './bible.graphql'
-export { biblResolvers } from './bible.resolvers'
+export { bibleType } from './bible';
+export { bibleResolvers } from './bible.resolvers';
