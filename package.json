@@ -7,7 +7,7 @@
     "start": "DEBUG=myapp:* nodemon --exec npm run babel-node ./bin/www",
     "start-webpack": "webpack-dev-server --open",
     "lint": "eslint app.js",
-    "test": "jest --coverage",
+    "test": "jest",
     "test-watch": "jest --watch",
     "build": "webpack --config webpack.prod.js"
   },
@@ -87,14 +87,6 @@
     }
   },
   "jest": {
-    "collectCoverageFrom": [
-      "**/*.{js,jsx}",
-      "!**/node_modules/**",
-      "!**/coverage/**",
-      "!**/cypress/**",
-      "!.*.js",
-      "!*.js"
-    ],
     "testPathIgnorePatterns": [
       "<rootDir>/cypress"
     ]
