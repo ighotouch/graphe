@@ -1,0 +1,5 @@
+type Bible {
+  id: ID!
+  version: String!
+}
+

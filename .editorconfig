@@ -1,0 +1,4 @@
+prettier.trailingComma = all,
+prettier.printWidth = 40,
+prettier.bracketSpacing = true,
+prettier.singleQuote = true

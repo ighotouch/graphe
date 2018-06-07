@@ -1,4 +1,6 @@
 const path = require('path');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const extractStyle = new ExtractTextPlugin({
@@ -6,7 +8,6 @@ const extractStyle = new ExtractTextPlugin({
 });
 
 module.exports = {
-  mode: 'production',
   entry: {
     frontend: './frontend/index.js',
     styles: [
@@ -14,16 +15,6 @@ module.exports = {
       path.resolve(__dirname, 'assets/stylesheets/style.scss'),
     ],
   },
-  devServer: {
-    contentBase: './public',
-  },
-  output: {
-    filename: '[name].js',
-    chunkFilename: '[id].js',
-    path: path.resolve(__dirname, 'public'),
-    publicPath: '/',
-  },
-  devtool: 'inline-source-map',
   module: {
     rules: [
       {
@@ -49,5 +40,17 @@ module.exports = {
     ],
   },
   resolve: { extensions: ['*', '.js', '.jsx', '.graphql'] },
-  plugins: [extractStyle],
+  plugins: [
+    extractStyle,
+    new CleanWebpackPlugin(['dist']),
+    new HtmlWebpackPlugin({
+      title: 'Production',
+    }),
+  ],
+  output: {
+    filename: '[name].js',
+    chunkFilename: '[id].js',
+    path: path.resolve(__dirname, 'public'),
+    publicPath: '/',
+  },
 };
