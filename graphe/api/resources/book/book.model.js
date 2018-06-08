@@ -7,13 +7,13 @@ const bookSchema = mongoose.Schema({
   },
   bible: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'bible',
+    ref: 'Bible',
     required: true,
   },
   chapters: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'chapter',
+      ref: 'Chapter',
     },
   ],
   description: {

@@ -32,7 +32,9 @@ config.databaseUrl = `mongodb://${process.env.DB_USERNAME}:${
   process.env.DB_PASSWORD
 }@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`;
 
-config = Object.assign(config, environmentSettings);
+// config.databaseUrl =
+//   'mongodb+srv://graphe_app:<Password>@graphe-1b4mg.mongodb.net/graphe?retryWrites=true';
+// config = Object.assign(config, environmentSettings);
 
 // Export final configuration object
 module.exports = config;
