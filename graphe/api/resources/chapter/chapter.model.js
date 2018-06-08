@@ -7,13 +7,13 @@ const chapterSchema = mongoose.Schema({
   },
   book: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'book',
-    required: true,
+    ref: 'Book',
+    required: [true, 'Chapter must belong to a book'],
   },
   verses: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'verse',
+      ref: 'Verse',
     },
   ],
   description: {

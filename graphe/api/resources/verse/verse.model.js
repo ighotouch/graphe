@@ -3,12 +3,16 @@ const mongoose = require('mongoose');
 const verseSchema = mongoose.Schema({
   number: {
     type: Number,
-    required: [true, 'Chapter must have a number'],
+    required: [true, 'Verse must have a number'],
   },
-  book: {
+  chapter: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'book',
+    ref: 'Chapter',
     required: true,
+  },
+  text: {
+    type: String,
+    required: [true, 'A verse must have a text'],
   },
   references: [
     {
