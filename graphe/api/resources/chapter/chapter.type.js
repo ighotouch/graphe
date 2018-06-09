@@ -16,7 +16,7 @@ export const chapterType = gql`
   }
 
   extend type Query {
-    getChapter: [Chapter]
+    getChapter(book: ID!): [Chapter]
   }
 
   extend type Mutation {

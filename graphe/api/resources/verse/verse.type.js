@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 export const verseType = gql`
   type Verse {
     number: Int
-    chapter: ID
+    chapter: Chapter
     text: String
     references: [Verse]
     tags: [String]
