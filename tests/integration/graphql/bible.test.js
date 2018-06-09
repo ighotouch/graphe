@@ -11,7 +11,7 @@ describe('Bible', () => {
   let book;
   let chapter;
   beforeAll(async () => {
-    await dropDb();
+     await dropDb();
     bible = await Bible.create(input);
     bookInput.bible = bible._id;
     book = await Book.create(bookInput);
@@ -115,7 +115,9 @@ describe('Bible', () => {
         newVerse(input: $input) {
           number
           text
-          chapter
+          chapter {
+            number
+          }
         }
       }
     `,
@@ -125,5 +127,27 @@ describe('Bible', () => {
 
     expect(result.errors).not.toBeDefined();
     expect(result.data.newVerse.text).toEqual(verseInput.text);
+  });
+
+  it('Should create new chapter', async () => {
+    const chapteInput = {
+      number: 1,
+      description: 'In the Be',
+      book: book._id,
+    };
+    const result = await runQuery(
+      `
+      mutation CreateChapter($input: NewChapter!) {
+        newChapter(input: $input) {
+          number
+        }
+      }
+    `,
+      { input: chapteInput },
+      {},
+    );
+
+    expect(result.errors).not.toBeDefined();
+    expect(result.data.newChapter.number).toEqual(chapteInput.number);
   });
 });

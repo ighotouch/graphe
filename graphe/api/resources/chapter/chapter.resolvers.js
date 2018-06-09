@@ -2,7 +2,7 @@ import { Chapter } from './chapter.model';
 
 const getChapters = () => Chapter.find({}).exec();
 
-const getChapter = input => Chapter.find({ input }).exec();
+const getChapter = (_, { input }) => Chapter.find({ input }).exec();
 
 const newChapter = (_, { input }) => Chapter.create(input);
 
