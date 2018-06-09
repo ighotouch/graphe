@@ -11,3 +11,4 @@ coverage
 cypress/screenshots
 cypress/videos
 .env
+tools

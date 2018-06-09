@@ -8,11 +8,12 @@ const bibleSchema = mongoose.Schema({
   version: {
     type: String,
     required: true,
+    unique: true,
   },
   books: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'book',
+      ref: 'Book',
     },
   ],
   description: {

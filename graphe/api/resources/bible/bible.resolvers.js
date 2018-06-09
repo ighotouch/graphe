@@ -1,21 +1,24 @@
 import { Bible } from './bible.model';
-import merge from 'lodash.merge';
+
+const getBibles = () => Bible.find({}).exec();
 
 const getBible = (_, { translation }) => Bible.findOne({ translation }).exec();
 
-const updateMe = () => {
-  const bible = new Bible({ translation: 'EN' });
-  bible.save();
-};
-
-const newBible = (_, { input }) => Bible.create(input);
+const newBible = (_, { input }) => Bible.createIndex(input);
 
 export const bibleResolvers = {
   Query: {
+    getBibles,
     getBible,
   },
   Mutation: {
     newBible,
+  },
+  Bible: {
+    async books(bible) {
+      const populated = await bible.populate('books').execPopulate();
+      return populated.books;
+    },
   },
 };
 

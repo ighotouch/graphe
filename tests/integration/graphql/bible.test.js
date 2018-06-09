@@ -1,24 +1,35 @@
 import { Bible } from '../../../graphe/api/resources/bible/bible.model';
 import { Book } from '../../../graphe/api/resources/book/book.model';
 import { Chapter } from '../../../graphe/api/resources/chapter/chapter.model';
+import { Verse } from '../../../graphe/api/resources/verse/verse.model';
 import { runQuery, dropDb } from '../../helpers';
 
 describe('Bible', () => {
   const input = { translation: 'EN', version: 'KJV' };
-  const bookInput = { title: 'Genesis', description: 'test-book' };
-  const chapterInput = { number: 1 };
+  const bookInput = { book: 'Genesis', description: 'test-book' };
+  const chapterInput = { chapter: 1 };
   let bible;
   let book;
   let chapter;
+  let verse;
   beforeAll(async () => {
-     await dropDb();
+    await dropDb();
     bible = await Bible.create(input);
     bookInput.bible = bible._id;
     book = await Book.create(bookInput);
     bible.books.push(book._id);
-    book = await bible.save();
+    bible = await bible.save();
     chapterInput.book = book._id;
     chapter = await Chapter.create(chapterInput);
+    book.chapters.push(chapter._id);
+    book.save();
+    verse = await Verse.create({
+      verse: 1,
+      text: 'In the be',
+      chapter: chapter._id,
+    });
+    chapter.verses.push(verse._id);
+    chapter.save();
   });
 
   afterAll(async () => {
@@ -70,7 +81,7 @@ describe('Bible', () => {
       {
         getBooks(bible: "${bible._id}") {
           bible
-          title
+          book
           description
         }
       }
@@ -80,7 +91,7 @@ describe('Bible', () => {
     );
 
     expect(result.errors).not.toBeDefined();
-    expect(result.data.getBooks[0].title).toEqual(bookInput.title);
+    expect(result.data.getBooks[0].book).toEqual(bookInput.book);
   });
 
   it('Should create new book', async () => {
@@ -88,7 +99,7 @@ describe('Bible', () => {
       `
       mutation CreateBook($input: NewBook!) {
         newBook(input: $input) {
-          title
+          book
           description
           bible
         }
@@ -99,13 +110,13 @@ describe('Bible', () => {
     );
 
     expect(result.errors).not.toBeDefined();
-    expect(result.data.newBook.title).toEqual(bookInput.title);
+    expect(result.data.newBook.book).toEqual(bookInput.book);
   });
 
   // Verse test
   it('Should create new verse', async () => {
     const verseInput = {
-      number: 1,
+      verse: 1,
       text: 'In the Be',
       chapter: chapter._id,
     };
@@ -113,10 +124,10 @@ describe('Bible', () => {
       `
       mutation CreateVerse($input: NewVerse!) {
         newVerse(input: $input) {
-          number
+          verse
           text
           chapter {
-            number
+            chapter
           }
         }
       }
@@ -131,7 +142,7 @@ describe('Bible', () => {
 
   it('Should create new chapter', async () => {
     const chapteInput = {
-      number: 1,
+      chapter: 1,
       description: 'In the Be',
       book: book._id,
     };
@@ -139,7 +150,7 @@ describe('Bible', () => {
       `
       mutation CreateChapter($input: NewChapter!) {
         newChapter(input: $input) {
-          number
+          chapter
         }
       }
     `,
@@ -148,6 +159,6 @@ describe('Bible', () => {
     );
 
     expect(result.errors).not.toBeDefined();
-    expect(result.data.newChapter.number).toEqual(chapteInput.number);
+    expect(result.data.newChapter.chapter).toEqual(chapteInput.chapter);
   });
 });

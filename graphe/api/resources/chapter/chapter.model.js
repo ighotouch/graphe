@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const chapterSchema = mongoose.Schema({
-  number: {
+  chapter: {
     type: Number,
     required: [true, 'Chapter must have a number'],
   },

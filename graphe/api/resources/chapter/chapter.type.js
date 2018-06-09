@@ -2,21 +2,23 @@ import gql from 'graphql-tag';
 
 export const chapterType = gql`
   type Chapter {
-    number: Int!
+    id: ID!
+    chapter: Int!
     book: ID!
     description: String
-    verses: [ID!]
+    verses: [Verse!]
   }
 
   input NewChapter {
-    number: Int
+    chapter: Int
     book: [ID!]
     description: String
     verses: [ID!]
   }
 
   extend type Query {
-    getChapter(book: ID!): [Chapter]
+    getChapters(book: ID!): [Chapter]
+    getChapter(book: ID!, chapter: Int): Chapter
   }
 
   extend type Mutation {
