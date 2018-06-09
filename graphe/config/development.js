@@ -1,4 +1,4 @@
-// require('dotenv').config();
+require('dotenv').config();
 
 // Dev environment settings
 const config = {};

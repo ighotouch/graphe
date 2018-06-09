@@ -1,3 +1,5 @@
+import { bookSchema } from '../book/book.model';
+
 const mongoose = require('mongoose');
 
 const bibleSchema = mongoose.Schema({
@@ -9,12 +11,7 @@ const bibleSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  books: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'book',
-    },
-  ],
+  books: [bookSchema],
   description: {
     type: String,
   },

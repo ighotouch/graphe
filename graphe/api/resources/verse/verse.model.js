@@ -1,14 +1,9 @@
 const mongoose = require('mongoose');
 
-const verseSchema = mongoose.Schema({
+export const verseSchema = mongoose.Schema({
   number: {
     type: Number,
     required: [true, 'Verse must have a number'],
-  },
-  chapter: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Chapter',
-    required: true,
   },
   text: {
     type: String,

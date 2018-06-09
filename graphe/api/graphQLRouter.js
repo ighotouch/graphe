@@ -9,7 +9,6 @@ import { chapterType, chapterResolvers } from './resources/chapter';
 const baseSchema = `
   schema {
     query: Query
-    mutation: Mutation
   }
 `;
 

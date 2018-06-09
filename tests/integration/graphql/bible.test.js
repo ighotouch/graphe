@@ -11,9 +11,12 @@ describe('Bible', () => {
   let book;
   let chapter;
   beforeAll(async () => {
-     await dropDb();
+    await dropDb();
     bible = await Bible.create(input);
     bookInput.bible = bible._id;
+
+    bible.books.push({ name: 'genesis', description: 'test' });
+    bible.save();
     book = await Book.create(bookInput);
     bible.books.push(book._id);
     book = await bible.save();
@@ -22,7 +25,7 @@ describe('Bible', () => {
   });
 
   afterAll(async () => {
-    await dropDb();
+    // await dropDb();
   });
 
   it('should get bible', async () => {

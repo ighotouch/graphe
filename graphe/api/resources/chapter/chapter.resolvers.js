@@ -1,25 +1,16 @@
-import { Chapter } from './chapter.model';
+import { Bible } from '../bible/bible.model';
 
 const getChapters = () => Chapter.find({}).exec();
 
-const getChapter = (_, { input }) => Chapter.find({ input }).exec();
-
-const newChapter = (_, { input }) => Chapter.create(input);
+const getChapter = async (_, { translation, version, book }) => {
+  const bible = await Bible.findOne({ translation, version }).exec();
+  bible.books.find(bk => bk.name === book);
+  // then search books for chapter
+};
 
 export const chapterResolvers = {
   Query: {
     getChapter,
-  },
-
-  Mutation: {
-    newChapter,
-  },
-
-  Chapter: {
-    async verses(chapter) {
-      const populated = await chapter.populate('verses').execPopulate();
-      return populated.verses;
-    },
   },
 };
 

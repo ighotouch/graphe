@@ -1,21 +1,13 @@
+import { chapterSchema } from '../chapter/chapter.model';
+
 const mongoose = require('mongoose');
 
-const bookSchema = mongoose.Schema({
-  title: {
+export const bookSchema = mongoose.Schema({
+  name: {
     type: String,
-    required: [true, 'Book must have a title'],
+    required: [true, 'Book must have a name'],
   },
-  bible: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Bible',
-    required: true,
-  },
-  chapters: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Chapter',
-    },
-  ],
+  chapters: [chapterSchema],
   description: {
     type: String,
   },

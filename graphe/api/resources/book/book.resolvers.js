@@ -1,33 +1,19 @@
-import { Book } from './book.model';
+import { Bible } from '../bible/bible.model';
 
-const getBooks = () => Book.find({}).exec();
+const getBooks = async (_, { translation }) => {
+  const bible = await Bible.findOne({ translation }).exec();
+  return bible.books;
+};
 
-const getBook = input => Book.find({ input }).exec();
-
-const newBook = (_, { input }) => Book.create(input);
-
-const updateBook = input => {
-  const { id, ...update } = input;
-
-  return Book.findByIdAndUpdate(id, update, { new: true }).exec();
+const getBook = async (_, { translation, version, book }) => {
+  const bible = await Bible.findOne({ translation, version }).exec();
+  return bible.books.find(bk => bk.name === book);
 };
 
 export const bookResolvers = {
   Query: {
     getBooks,
     getBook,
-  },
-
-  Mutation: {
-    newBook,
-    updateBook,
-  },
-
-  Book: {
-    async chapters(book) {
-      const populated = await book.populate('chapters').execPopulate();
-      return populated.chapters;
-    },
   },
 };
 
