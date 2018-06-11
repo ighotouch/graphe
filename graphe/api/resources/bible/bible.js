@@ -2,6 +2,7 @@ import gql from 'graphql-tag';
 
 export const bibleType = gql`
   type Bible {
+    id: ID!
     translation: String!
     version: String
     books: [Book]
@@ -22,6 +23,7 @@ export const bibleType = gql`
 
   type Query {
     Bible(id: ID!): Bible
+    getBibles: [Bible]
     getBible(translation: String!): Bible
   }
 

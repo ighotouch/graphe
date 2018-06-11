@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const verseSchema = mongoose.Schema({
-  number: {
+  verse: {
     type: Number,
     required: [true, 'Verse must have a number'],
   },

@@ -1,16 +1,11 @@
 import { Book } from './book.model';
 
-const getBooks = () => Book.find({}).exec();
+const getBooks = (_, { bible }) => Book.find({ bible }).exec();
 
-const getBook = input => Book.find({ input }).exec();
+const getBook = (_, { bible, book }) =>
+  Book.findOne({ _id: bible, book }).exec();
 
 const newBook = (_, { input }) => Book.create(input);
-
-const updateBook = input => {
-  const { id, ...update } = input;
-
-  return Book.findByIdAndUpdate(id, update, { new: true }).exec();
-};
 
 export const bookResolvers = {
   Query: {
@@ -20,7 +15,6 @@ export const bookResolvers = {
 
   Mutation: {
     newBook,
-    updateBook,
   },
 
   Book: {

@@ -1,10 +1,10 @@
 import { Book } from '../../../graphe/api/resources/book/book.model';
 
 describe('Book', () => {
-  it('Should be invalid if title is empty', () => {
+  it('Should be invalid if book is empty', () => {
     const book = new Book({ description: 'good' });
     const validation = book.validateSync();
-    expect(validation.errors.title.kind).toEqual('required');
+    expect(validation.errors.book.kind).toEqual('required');
   });
 
   it('Should be invalid if bible is empty', () => {
