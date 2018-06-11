@@ -65,13 +65,16 @@ describe('Bible', () => {
         }
       }
     `,
-      { input },
+      { input: { translation: 'EN', version: 'NIV' } },
       {},
     );
 
     expect(result.errors).not.toBeDefined();
-    expect(result.data.newBible).toMatchObject(input);
-    expect(result.data.newBible.version).toEqual(bible.version);
+    expect(result.data.newBible).toMatchObject({
+      translation: 'EN',
+      version: 'NIV',
+    });
+    expect(result.data.newBible.version).toEqual('NIV');
   });
 
   // Testing Book Resource
@@ -126,9 +129,6 @@ describe('Bible', () => {
         newVerse(input: $input) {
           verse
           text
-          chapter {
-            chapter
-          }
         }
       }
     `,

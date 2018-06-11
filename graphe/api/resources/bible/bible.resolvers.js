@@ -4,7 +4,7 @@ const getBibles = () => Bible.find({}).exec();
 
 const getBible = (_, { translation }) => Bible.findOne({ translation }).exec();
 
-const newBible = (_, { input }) => Bible.createIndex(input);
+const newBible = (_, { input }) => Bible.create(input);
 
 export const bibleResolvers = {
   Query: {
